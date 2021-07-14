@@ -143,31 +143,31 @@ When you click the Start Game’ button all the cards will be hidden and their o
 
 ### Flipping Cards
 To show the contents of each card the flipCard() action can be dispatched when a card is clicked.
-
 In Card.js, start with the necessary imports:
+13a. Add useDispatch to the react-redux import statement.
+```javascript
+import { useSelector, useDispatch } from 'react-redux';
+```
+13b. Add flipCard to the boardSlice.js import statement.
+```javascript
+import { selectVisibleIDs, flipCard } from '../../boardSlice';
+```
+14a. Inside the Card component definition: Define a variable called dispatch and give it the reference to the Redux store dispatch function returned by useDispatch().
+```javascript
+const dispatch = useDispatch();
+```
+14b. Inside the flipHandler() function, dispatch the action created by flipCard(id).
+```javascript
+dispatch(flipCard(id));
+```
+Checkpoint 3: When each card is clicked, it becomes ‘flipped’ because it’s visible property is set to true. In fact, you can now flip over all the cards if you want to check that they are random.
 
-Add useDispatchto the react-redux import statement.
-Add flipCard to the boardSlice.js import statement.
-
+Limit the number of visible cards at a time to 2.
+15a. Inside the Card component: Place the condition that the length of visibleIDs is equal to 2 in the third if statement.
 ```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
+if (visibleIDs.length === 2) {
+  click = () => {};
+}
 ```
 
 ### Reset the Flipped Cards
