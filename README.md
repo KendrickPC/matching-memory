@@ -88,15 +88,33 @@ export const selectVisibleIDs = (state) => state.board.filter(card => card.visib
 ```javascript
 export const selectVisibleIDs = (state) => state.board.filter(card => card.visible).map(card => card.id);
 ```
+With the selector complete, open Card.js to begin implementing the presentation behavior of the Card component.
 
-
-
-
-
+In Card.js, start with the necessary imports:
+8a. Import useSelector from react-redux.
 ```javascript
+import { useSelector } from 'react-redux';
 ```
+8b. Import the selector you implemented in the previous step from boardSlice.js.
 ```javascript
+import { selectVisibleIDs } from '../../boardSlice';
 ```
+Retrieve the visible card data to know which card to display on the board.
+9a. Inside the Card component definition: Define a variable named visibleIDs and assign it the data retrieved from calling useSelector() with the selectVisibleIDs selector.
+```javascript
+const visibleIDs = useSelector(selectVisibleIDs);
+```
+10a. Inside the Card component definition: Remove the false in the first if statement. Instead, check that the Card component’s id prop is included in visibleIDs array.
+[JS Includes documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+```javascript
+if (visibleIDs.includes(id)) {
+  ...
+}
+```
+You should now see all the cards in their initialized order.
+![Checkpoint 2](./checkpoint2.png)
+
+
 ```javascript
 ```
 ```javascript
