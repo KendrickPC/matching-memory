@@ -64,29 +64,35 @@ rowCards.push(currentBoard[cardIndex])
 ```
 ![Checkpoint 1](./checkpoint1.png)
 
-### Create the Board Layout
+### Show Your Cards
+In boardSlice.js, implement a selector:
+
+7a. Create an export statement with a defined selector, selectVisibleIDs.
+Note: At the bottom of the boardSlice.js file, write the function.
 ```javascript
+export const selectVisibleIDs = () => "Something Here"
 ```
+7b. The selector should return an array that filters the board array and then maps the filtered array. Use state.board.filter().map(). 
 ```javascript
+export const selectVisibleIDs = (state) => state.board.filter().map();
 ```
+7c. The callback function for filter() should test card.visible, where card is the parameter of the callback function.
+Note: I google searched filter an array of objects.
+[JS Filter for this specific case](https://www.javascripttutorial.net/javascript-array-filter/)
 ```javascript
+export const selectVisibleIDs = (state) => state.board.filter(card => card.visible).map();
+// Check if card.visible === true works as well.
+export const selectVisibleIDs = (state) => state.board.filter(card => card.visible === true).map();
 ```
+7d. The callback function for map() should return card.id, where card is the parameter of the callback function.
 ```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
+export const selectVisibleIDs = (state) => state.board.filter(card => card.visible).map(card => card.id);
 ```
 
-### Show Your Cards
-```javascript
-```
-```javascript
-```
+
+
+
+
 ```javascript
 ```
 ```javascript
