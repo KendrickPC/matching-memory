@@ -171,8 +171,21 @@ if (visibleIDs.length === 2) {
 ```
 
 ### Reset the Flipped Cards
+
+In App.js, import and dispatch the resetCards() action:
+
+16a. Add resetCards to the boardSlice.js import statement.
 ```javascript
+import { setBoard, resetCards } from './features/board/boardSlice.js';
 ```
+16b. Inside the tryAgainHandler() function, dispatch the action created by resetCards().
+```javascript
+dispatch(resetCards())
+```
+Checkpoint 4: Confirm that you completed this step properly by revealing two cards, and then pressing “Try New Pair”
+
+
+
 ```javascript
 ```
 ```javascript
