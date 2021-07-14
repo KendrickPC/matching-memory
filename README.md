@@ -1,6 +1,8 @@
 # Matching Memory:
 
 ### Provide the Redux Store to Your Application
+
+Note: [Provider React-Redux documentation](https://react-redux.js.org/api/provider)
 1a. In index.js, import the Provider component.
 ```javascript
 import { Provider } from 'react-redux';

@@ -8,7 +8,9 @@ import { store } from './app/store.js';
 
 ReactDOM.render(
   // Implement Provider component with store below
-  
-    <App />,
+  // https://react-redux.js.org/api/provider
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
