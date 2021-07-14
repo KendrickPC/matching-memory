@@ -1,4 +1,3 @@
-import React from 'react';
 // Add import statements below
 import { useSelector } from 'react-redux';
 import { selectVisibleIDs } from '../../boardSlice';

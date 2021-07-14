@@ -1,7 +1,6 @@
 # Matching Memory:
 
 ### Provide the Redux Store to Your Application
-
 Note: [Provider React-Redux documentation](https://react-redux.js.org/api/provider)
 1a. In index.js, import the Provider component.
 ```javascript
@@ -20,6 +19,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
 ### Create the Board Layout
 At the bottom of boardSlice.js:
 Note: Take a look at the hint if stuck. It really is helpful.
@@ -46,6 +46,9 @@ export const selectBoard = (state) => state.board.map(card => ({id: card.id, con
 ```
 4a. In Board.js, start with the necessary import statements.
 Import useSelector from react-redux. [React Redux Hooks documentation](https://react-redux.js.org/api/hooks)
+```javascript
+import { useSelector } from 'react-redux';
+```
 4b. Import the selector you implemented in the previous step from ./boardSlice.js.
 ```javascript
 import { selectBoard } from './boardSlice.js';
@@ -86,7 +89,7 @@ export const selectVisibleIDs = (state) => state.board.filter(card => card.visib
 ```
 7d. The callback function for map() should return card.id, where card is the parameter of the callback function.
 ```javascript
-export const selectVisibleIDs = (state) => state.board.filter(card => card.visible).map(card => card.id);
+export const selectVisibleIDs = (state) => state.board.filter(card => card.visible === true).map(card => card.id);
 ```
 With the selector complete, open Card.js to begin implementing the presentation behavior of the Card component.
 
@@ -108,49 +111,44 @@ const visibleIDs = useSelector(selectVisibleIDs);
 [JS Includes documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 ```javascript
 if (visibleIDs.includes(id)) {
-  ...
+  cardText = contents;
+  click = () => {};
 }
 ```
 You should now see all the cards in their initialized order.
 ![Checkpoint 2](./checkpoint2.png)
 
-
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-
 ### Start the Game
+Open App.js where you will find the function startGameHandler(). You need to dispatch the action from this function.
+11a. In App.js, start with imports: Import useDispatch from react-redux.
 ```javascript
+import { useDispatch } from 'react-redux';
 ```
+11b. Import the setBoard action creator from boardSlice.js.
 ```javascript
+import { setBoard } from './features/board/boardSlice.js';
 ```
+Now you can dispatch the action created by setBoard() within startGameHandler(). The setBoard() action creator takes no arguments.
+12a. Inside the App component: Define a new variable called dispatch and give it the reference to the Redux store dispatch function.
+[React Redux dispatch documentation](https://react-redux.js.org/api/hooks)
 ```javascript
+const dispatch = useDispatch();
 ```
+12b. Inside the startGameHandler() function, dispatch the action created by setBoard().
 ```javascript
+dispatch(setBoard());
 ```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
+Note: It is important to remember that action creators don’t dispatch actions but return the formatted action object with the appropriate payload. You can confirm this behavior in boardSlice.js.
+When you click the Start Game’ button all the cards will be hidden and their order randomized.
 
 ### Flipping Cards
+To show the contents of each card the flipCard() action can be dispatched when a card is clicked.
+
+In Card.js, start with the necessary imports:
+
+Add useDispatchto the react-redux import statement.
+Add flipCard to the boardSlice.js import statement.
+
 ```javascript
 ```
 ```javascript
