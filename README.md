@@ -242,43 +242,38 @@ if (visibleIDs.includes(id) || matchedIDs.includes(id)) {
 }
 ```
 
-When you match a pair of cards, the cards keep showing their text and stop dispatching actions (first if statement) and the text will turn green (second if statement).
-
-You now have a fully functioning one player matching game! Now move on to the last step, keeping score.
-
-
-
-
-```javascript
-```
-```javascript
-```
-```javascript
-```
-
 ### Get the Score
+
+Inside Score.js:
+20a. Import useSelector from react-redux.
 ```javascript
+import { useSelector } from "react-redux";
 ```
+20b. Import the selectMatchedIDs selector from boardSlice.js.
 ```javascript
+import { selectMatchedIDs } from "../board/boardSlice";
 ```
+
+Finally, with the selectMatchedIDs()selector, get the number of values in the array of IDs and set the score.
+
+Inside the Score component:
+
+21a. Define a variable named cardsMatched and assign it the data retrieved from calling useSelector() with the selectMatchedIDs selector.
 ```javascript
+const cardsMatched = useSelector(selectMatchedIDs())
 ```
+Replace the 0 inside the returned <div> with the length of cardsMatched.
 ```javascript
+<div className="score-container">Matched: {cardsMatched}</div>
 ```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
+
+The game now displays the number of cards you matched!
+
+
 
 ### Extra Challenges
-```javascript
-```
-```javascript
-```
+
+
 ```javascript
 ```
 ```javascript
