@@ -260,29 +260,49 @@ Inside the Score component:
 
 21a. Define a variable named cardsMatched and assign it the data retrieved from calling useSelector() with the selectMatchedIDs selector.
 ```javascript
-const cardsMatched = useSelector(selectMatchedIDs())
+const cardsMatched = useSelector(selectMatchedIDs)
 ```
-Replace the 0 inside the returned <div> with the length of cardsMatched.
+21b. Replace the 0 inside the returned <div> with the length of cardsMatched.
 ```javascript
-<div className="score-container">Matched: {cardsMatched}</div>
+<div className="score-container">Matched: {cardsMatched.length}</div>
 ```
-
 The game now displays the number of cards you matched!
 
+### Extra Challenge
+In Card.js:
+22a. Reset the unmatched cards by clicking any card. This involves making a new action handler in Card.js and assigning it to the Card component click in a specific scenario.
 
-
-### Extra Challenges
-
-
+Basically, in App.js, copy the tryAgainHandler function and paste it in Card.js's Card component. 
 ```javascript
+  const tryAgainHandler = () => {
+    // Add action dispatch below
+    dispatch(resetCards())
+  };
 ```
+Now, since we are now calling resetCards(), import resetCards at the top of the file.
 ```javascript
+import { selectVisibleIDs, flipCard, selectMatchedIDs, resetCards } from '../../boardSlice';
 ```
+In the third if statement, after 2 flipped cards have taken place, change the click function to the following: 
 ```javascript
+  // 3rd if statement
+  // implement number of flipped cards check
+  if (visibleIDs.length === 2) {
+    click = tryAgainHandler;
+  }
 ```
+22b. In index.css there is a ‘no-match’ selector which makes text red and can be applied to the card style when two visible cards are not matching. The challenge here is to apply the style to the text of cards that are flipped over and not matched.
+Note: In Card.js, similar to the second if statement, try matchedIDs.includes(id) === false and return cardstyle = 'no-match' as follows: 
 ```javascript
+  if (!matchedIDs.includes(id)) {
+    cardStyle = 'no-match';
+  }
 ```
+The code now gives a red color style for unmatched cards, but if we want this red color style applied after two cards have been clicked (and keeping the white color style for one card clicked/visible), we can add another parameter to our 4th if statement as follows: 
 ```javascript
+  if (!matchedIDs.includes(id) && visibleIDs.length === 2) {
+    cardStyle = 'no-match';
+  }
 ```
 ```javascript
 ```

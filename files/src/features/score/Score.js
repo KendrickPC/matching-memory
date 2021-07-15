@@ -5,10 +5,10 @@ import { selectMatchedIDs } from "../board/boardSlice";
 
 export const Score = () => {
   // Add selected data variable below
-  const cardsMatched = useSelector(selectMatchedIDs())
+  const cardsMatched = useSelector(selectMatchedIDs)
 
   return (
     // implement selected data inside <div>
-    <div className="score-container">Matched: {cardsMatched}</div>
+    <div className="score-container">Matched: {cardsMatched.length}</div>
   );
 };
