@@ -192,38 +192,63 @@ dispatch(resetCards())
 ```
 Checkpoint 4: Confirm that you completed this step properly by revealing two cards, and then pressing “Try New Pair”
 
-
-
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-```javascript
-```
-
 ### Matching Cards
+
+The last step of the game behavior is to identify matched cards on the board using the matched property of each card object in the store. This will require a final selector.
+
+In boardSlice.js:
+
+17a. Create an export statement with a defined selector, selectMatchedIDs.
 ```javascript
+export const selectMatchedIDs = () => "Something Here";
 ```
+17b. This selector is the same as selectVisibleIDs() except you need to change the filter() callback function to test the card.matched value.
 ```javascript
+export const selectMatchedIDs = (state) => state.board.filter(card => card.matched === true).map(card => card.id);
 ```
+In Card.js:
+
+18a. Add selectMatchedIDs to the boardSlice.js import statement.
 ```javascript
+import { selectVisibleIDs, flipCard, selectMatchedIDs } from '../../boardSlice';
 ```
+18b. Define a variable named matchedIDs and assign it the data retrieved from calling useSelector() with the selectMatchedIDs selector.
+Note: Place this variable under the previous useSelector call.
 ```javascript
+const matchedIDs = useSelector(selectMatchedIDs);
 ```
+
+Using the matchedIDs data, you can now reveal the matched cards by changing their cardStyle to 'matched'.
+
+Inside the Card component:
+
+19a. Replace the false condition in the second if statement that only checks if the card id prop is included in matchedIDs.
+Note: Check the previous includes usage implemented in the first if statement.
 ```javascript
+// 2nd if statement
+// implement card id array membership check
+if (matchedIDs.includes(id)) {
+  cardStyle = 'matched';
+}
 ```
+19b. Both visible and matched cards should show their text. So, add a second condition to the first if statement that checks if the card’s id prop is included in matchedIDs OR it is included in visibleIDs.
+Note: In first if statement
+```javascript
+// 1st if statement
+// implement card id array membership check
+if (visibleIDs.includes(id) || matchedIDs.includes(id)) {
+  cardText = contents;
+  click = () => {};
+}
+```
+
+When you match a pair of cards, the cards keep showing their text and stop dispatching actions (first if statement) and the text will turn green (second if statement).
+
+You now have a fully functioning one player matching game! Now move on to the last step, keeping score.
+
+
+
+
 ```javascript
 ```
 ```javascript
